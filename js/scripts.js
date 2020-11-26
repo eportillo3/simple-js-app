@@ -44,3 +44,16 @@ let pokemonList = [{
     type: ['water'],
   },
 ]
+
+
+// displays height and size of pokemon
+
+for (let i = 0; i < pokemonList.length; i++) {
+  if (pokemonList[i].height < 0.9) {
+    document.write(pokemonList[i].name + " height: " + (pokemonList[i].height) + " small pokemon");
+  } else if (pokemonList[i].height > 0.9 && pokemonList[i].height < 1.4) {
+    document.write(pokemonList[i].name + " medium pokemon");
+  } else {
+    document.write(pokemonList[i].name + " large pokemon");
+  }
+}
