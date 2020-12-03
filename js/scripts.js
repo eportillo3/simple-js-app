@@ -1,4 +1,5 @@
-let pokemonList = [{
+let pokemonRepository = (function () {
+  let pokemonList = [{
     name: 'Bulbasaur',
     height: '0.7',
     type: ['grass', 'poison'],
@@ -42,18 +43,38 @@ let pokemonList = [{
     name: 'Blastoise',
     height: '1.6',
     type: ['water'],
-  },
-]
+  }
+];
+
+  function add() {
+    pokemonList.add(pokemon);
+  }
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  pokemonList.forEach(function(pokemon) {
+    console.log(pokemon.name + ' height: ' + pokemon.height);
+  })
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+
+  
+})();
 
 
 // displays height and size of pokemon
 
-for (let i = 0; i < pokemonList.length; i++) {
-  if (pokemonList[i].height < 0.9) {
-    document.write(pokemonList[i].name + " height: " + (pokemonList[i].height) + " small pokemon" + "<br>");
-  } else if (pokemonList[i].height > 0.9 && pokemonList[i].height < 1.4) {
-    document.write(pokemonList[i].name + " medium pokemon" + "<br>");
-  } else {
-    document.write(pokemonList[i].name + " large pokemon" + "<br>");
-  }
-}
+// for (let i = 0; i < pokemonList.length; i++) {
+//   if (pokemonList[i].height < 0.9) {
+//     document.write(pokemonList[i].name + " height: " + (pokemonList[i].height) + " small pokemon" + "<br>");
+//   } else if (pokemonList[i].height > 0.9 && pokemonList[i].height < 1.4) {
+//     document.write(pokemonList[i].name + " medium pokemon" + "<br>");
+//   } else {
+//     document.write(pokemonList[i].name + " large pokemon" + "<br>");
+//   }
+// }
