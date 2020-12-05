@@ -46,25 +46,28 @@ let pokemonRepository = (function () {
   }
 ];
 
-  function add() {
-    pokemonList.add(pokemon);
+  function add(pokemon) {
+    pokemonList.push(pokemon);
   }
 
   function getAll() {
     return pokemonList;
   }
 
-  pokemonList.forEach(function(pokemon) {
-    console.log(pokemon.name + ' height: ' + pokemon.height);
-  })
-
   return {
     add: add,
     getAll: getAll
   };
 
-  
+
 })();
+
+
+pokemonRepository.add({ name: 'Pikachu', height: 0.3, type: ['Electric'] })
+
+pokemonRepository.getAll().forEach(function (pokemon) {
+    console.log(pokemon.name + ' height: ' + pokemon.height);
+  })
 
 
 // displays height and size of pokemon
