@@ -1,4 +1,4 @@
-let pokemonRepository = (function () {
+let pokemonRepository = (function() {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -10,8 +10,8 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-//This function adds a list item to the list for each pokemon
-  function addListItem(pokemon){
+  //This function adds a list item to the list for each pokemon
+  function addListItem(pokemon) {
     let pokemonList = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
     let button = document.createElement('button');
@@ -19,49 +19,49 @@ let pokemonRepository = (function () {
     button.classList.add('button-class');
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
-    button.addEventListener('click', function (event){
+    button.addEventListener('click', function(event) {
       showDetails(pokemon)
     });
   }
 
-// this function loads the list of pokemon after it fetches it from the api
+  // this function loads the list of pokemon after it fetches it from the api
   function loadList() {
-    return fetch(apiUrl).then(function (response) {
+    return fetch(apiUrl).then(function(response) {
       return response.json();
-    }).then(function (json) {
-      json.results.forEach(function (item) {
+    }).then(function(json) {
+      json.results.forEach(function(item) {
         let pokemon = {
           name: item.name,
           detailsUrl: item.url
         };
         add(pokemon);
       });
-    }).catch(function (e) {
+    }).catch(function(e) {
       console.error(e);
     })
   }
 
   // this function loads the details of the pokemon
-    function loadDetails(item) {
+  function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
+    return fetch(url).then(function(response) {
       return response.json();
-    }).then(function (details) {
+    }).then(function(details) {
       // Now we add the details to the item
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = details.types;
-    }).catch(function (e) {
+    }).catch(function(e) {
       console.error(e);
     });
   }
 
-// this fucntion shows the details in the modal
-function showDetails(item){
-  loadDetails(item).then(function (){
-    showModal(item);
-  });
-}
+  // this fucntion shows the details in the modal
+  function showDetails(item) {
+    loadDetails(item).then(function() {
+      showModal(item);
+    });
+  }
 
 
 
@@ -78,7 +78,7 @@ function showDetails(item){
 
 //This is a loop that displays the contents of the array to the browser
 pokemonRepository.loadList().then(function() {
-  pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
 
 
@@ -125,7 +125,7 @@ function showModal(pokemon) {
   //closes when the user clicks outside of the modal window
   modalContainer.addEventListener('click', (e) => {
     let target = e.target;
-    if (target === modalContainer){
+    if (target === modalContainer) {
       hideModal();
     }
   });
@@ -146,18 +146,18 @@ function showModal(pokemon) {
 let dialogPromiseReject; //This can be set later, by showDialog
 
 //function hides the modal when certain event listeners are triggered (see inside the "showModal" function)
-function hideModal(){
+function hideModal() {
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.classList.remove('is-visible');
 
-  if(dialogPromiseReject){ //This is a fail-safe from the promise below if a user doesn't click "confirm" or "cancel"
+  if (dialogPromiseReject) { //This is a fail-safe from the promise below if a user doesn't click "confirm" or "cancel"
     dialogPromiseReject();
     dialogPromiseReject = null;
   }
 }
 
 //This function will show dialog within the "Show Dialog" modal
-function showDialog(title, text){
+function showDialog(title, text) {
   showModal(title, text);
 
   //we defined the modalContainer here
