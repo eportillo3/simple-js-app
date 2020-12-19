@@ -6,7 +6,6 @@
     "jquery": true
   },
   "extends": ["eslint:recommended"],
-  "plugins": ["dollar-sign", "jquery"],
   "rules": {
     "quotes": ["error", "single"]
   }
